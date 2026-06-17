@@ -10,124 +10,221 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:#f7f7f7;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+min-height:100vh;
 }
 
 header{
-background:linear-gradient(135deg,#ff7e5f,#feb47b);
-color:white;
 text-align:center;
 padding:30px;
+color:white;
+}
+
+header h1{
+font-size:40px;
 }
 
 .search-box{
-text-align:center;
+display:flex;
+justify-content:center;
 margin:20px;
 }
 
 .search-box input{
 width:80%;
-max-width:400px;
-padding:12px;
-border-radius:25px;
+max-width:500px;
+padding:15px;
 border:none;
-box-shadow:0 2px 5px rgba(0,0,0,0.2);
+border-radius:30px;
+font-size:16px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-.container{
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.stat-card{
+background:white;
+padding:20px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.stat-card h2{
+color:#ff6b6b;
+}
+
+.categories{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
+padding:10px;
+}
+
+.category{
+background:white;
+padding:10px 20px;
+border-radius:25px;
+font-weight:bold;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.recipe-container{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 padding:20px;
 }
 
-.card{
+.recipe-card{
 background:white;
-border-radius:15px;
+border-radius:20px;
 overflow:hidden;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
 transition:0.3s;
 }
 
-.card:hover{
-transform:scale(1.03);
+.recipe-card:hover{
+transform:translateY(-5px);
 }
 
-.card img{
+.recipe-card img{
 width:100%;
 height:180px;
 object-fit:cover;
 }
 
-.card-content{
+.recipe-content{
 padding:15px;
 }
 
-.card-content h3{
+.recipe-content h3{
 margin-bottom:10px;
 }
 
-.time{
-color:#ff7e5f;
-font-weight:bold;
+.recipe-info{
+display:flex;
+justify-content:space-between;
+margin-top:10px;
+font-size:14px;
+}
+
+.favorite{
+background:#ff6b6b;
+color:white;
+border:none;
+padding:8px 15px;
+border-radius:20px;
+margin-top:10px;
+cursor:pointer;
 }
 
 footer{
-text-align:center;
-padding:20px;
-background:#333;
+background:#222;
 color:white;
+text-align:center;
+padding:15px;
 margin-top:20px;
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <header>
 <h1>🍲 Recipe Finder Dashboard</h1>
-<p>Discover Delicious Recipes</p>
+<p>Explore Delicious Recipes</p>
 </header>
 
 <div class="search-box">
 <input type="text" placeholder="Search Recipes...">
 </div>
 
-<div class="container">
+<div class="stats">
+<div class="stat-card">
+<h2>24</h2>
+<p>Total Recipes</p>
+</div>
 
-<div class="card">
+<div class="stat-card">
+<h2>8</h2>
+<p>Favorites</p>
+</div>
+
+<div class="stat-card">
+<h2>4</h2>
+<p>Categories</p>
+</div>
+</div>
+
+<div class="categories">
+<div class="category">🍳 Breakfast</div>
+<div class="category">🍔 Lunch</div>
+<div class="category">🍕 Dinner</div>
+<div class="category">🍰 Dessert</div>
+</div>
+
+<div class="recipe-container">
+
+<div class="recipe-card">
 <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591">
-<div class="card-content">
+<div class="recipe-content">
 <h3>Pizza</h3>
-<p class="time">⏱ 30 Minutes</p>
+<p>Cheesy and delicious Italian pizza.</p>
+<div class="recipe-info">
+<span>⏱ 30 min</span>
+<span>⭐ Easy</span>
+</div>
+<button class="favorite">❤️ Favorite</button>
 </div>
 </div>
 
-<div class="card">
+<div class="recipe-card">
 <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
-<div class="card-content">
+<div class="recipe-content">
 <h3>Burger</h3>
-<p class="time">⏱ 15 Minutes</p>
+<p>Juicy burger with fresh ingredients.</p>
+<div class="recipe-info">
+<span>⏱ 15 min</span>
+<span>⭐ Easy</span>
+</div>
+<button class="favorite">❤️ Favorite</button>
 </div>
 </div>
 
-<div class="card">
+<div class="recipe-card">
 <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9">
-<div class="card-content">
+<div class="recipe-content">
 <h3>Pasta</h3>
-<p class="time">⏱ 20 Minutes</p>
+<p>Creamy pasta with rich flavor.</p>
+<div class="recipe-info">
+<span>⏱ 20 min</span>
+<span>⭐ Medium</span>
+</div>
+<button class="favorite">❤️ Favorite</button>
 </div>
 </div>
 
-<div class="card">
+<div class="recipe-card">
 <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af">
-<div class="card-content">
+<div class="recipe-content">
 <h3>Sandwich</h3>
-<p class="time">⏱ 10 Minutes</p>
+<p>Healthy and tasty sandwich.</p>
+<div class="recipe-info">
+<span>⏱ 10 min</span>
+<span>⭐ Easy</span>
+</div>
+<button class="favorite">❤️ Favorite</button>
 </div>
 </div>
 
