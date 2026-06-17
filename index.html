@@ -19,13 +19,17 @@ min-height:100vh;
 }
 
 header{
+padding:25px;
 text-align:center;
-padding:30px;
 color:white;
 }
 
 header h1{
-font-size:40px;
+font-size:42px;
+}
+
+header p{
+margin-top:10px;
 }
 
 .search-box{
@@ -35,8 +39,8 @@ margin:20px;
 }
 
 .search-box input{
-width:80%;
-max-width:500px;
+width:85%;
+max-width:600px;
 padding:15px;
 border:none;
 border-radius:30px;
@@ -52,7 +56,7 @@ padding:20px;
 }
 
 .stat-card{
-background:white;
+background:rgba(255,255,255,0.9);
 padding:20px;
 border-radius:20px;
 text-align:center;
@@ -68,20 +72,21 @@ display:flex;
 justify-content:center;
 flex-wrap:wrap;
 gap:10px;
-padding:10px;
+padding:15px;
 }
 
 .category{
-background:white;
-padding:10px 20px;
+border:none;
+padding:12px 20px;
 border-radius:25px;
+cursor:pointer;
+background:white;
 font-weight:bold;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
 
 .recipe-container{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
 padding:20px;
 }
@@ -100,7 +105,7 @@ transform:translateY(-5px);
 
 .recipe-card img{
 width:100%;
-height:180px;
+height:200px;
 object-fit:cover;
 }
 
@@ -108,46 +113,35 @@ object-fit:cover;
 padding:15px;
 }
 
-.recipe-content h3{
-margin-bottom:10px;
-}
-
 .recipe-info{
 display:flex;
 justify-content:space-between;
 margin-top:10px;
-font-size:14px;
 }
 
 .favorite{
 background:#ff6b6b;
 color:white;
 border:none;
-padding:8px 15px;
+padding:10px 15px;
 border-radius:20px;
 margin-top:10px;
 cursor:pointer;
 }
-
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:15px;
-margin-top:20px;
-}
 </style>
-
 </head>
+
 <body>
 
 <header>
 <h1>🍲 Recipe Finder Dashboard</h1>
-<p>Explore Delicious Recipes</p>
+<p>Search and Discover Delicious Recipes</p>
 </header>
 
 <div class="search-box">
-<input type="text" placeholder="Search Recipes...">
+<input type="text" id="searchInput"
+placeholder="Search Recipes..."
+onkeyup="searchRecipes()">
 </div>
 
 <div class="stats">
@@ -157,7 +151,7 @@ margin-top:20px;
 </div>
 
 <div class="stat-card">
-<h2>8</h2>
+<h2 id="favCount">0</h2>
 <p>Favorites</p>
 </div>
 
@@ -168,71 +162,184 @@ margin-top:20px;
 </div>
 
 <div class="categories">
-<div class="category">🍳 Breakfast</div>
-<div class="category">🍔 Lunch</div>
-<div class="category">🍕 Dinner</div>
-<div class="category">🍰 Dessert</div>
+<button class="category"
+onclick="filterRecipes('all')">
+All
+</button>
+
+<button class="category"
+onclick="filterRecipes('Breakfast')">
+🍳 Breakfast
+</button>
+
+<button class="category"
+onclick="filterRecipes('Lunch')">
+🍔 Lunch
+</button>
+
+<button class="category"
+onclick="filterRecipes('Dinner')">
+🍕 Dinner
+</button>
+
+<button class="category"
+onclick="filterRecipes('Dessert')">
+🍰 Dessert
+</button>
 </div>
 
 <div class="recipe-container">
 
-<div class="recipe-card">
+<div class="recipe-card"
+data-category="Dinner">
+
 <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591">
+
 <div class="recipe-content">
 <h3>Pizza</h3>
 <p>Cheesy and delicious Italian pizza.</p>
+
 <div class="recipe-info">
 <span>⏱ 30 min</span>
 <span>⭐ Easy</span>
 </div>
-<button class="favorite">❤️ Favorite</button>
-</div>
-</div>
 
-<div class="recipe-card">
+<button class="favorite"
+onclick="addFavorite()">
+❤️ Favorite
+</button>
+
+</div>
+</div>
+<div class="recipe-card"
+data-category="Lunch">
+
 <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
+
 <div class="recipe-content">
 <h3>Burger</h3>
 <p>Juicy burger with fresh ingredients.</p>
+
 <div class="recipe-info">
 <span>⏱ 15 min</span>
 <span>⭐ Easy</span>
 </div>
-<button class="favorite">❤️ Favorite</button>
+
+<button class="favorite"
+onclick="addFavorite()">
+❤️ Favorite
+</button>
+
 </div>
 </div>
 
-<div class="recipe-card">
+<div class="recipe-card"
+data-category="Dinner">
+
 <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9">
+
 <div class="recipe-content">
 <h3>Pasta</h3>
 <p>Creamy pasta with rich flavor.</p>
+
 <div class="recipe-info">
 <span>⏱ 20 min</span>
 <span>⭐ Medium</span>
 </div>
-<button class="favorite">❤️ Favorite</button>
+
+<button class="favorite"
+onclick="addFavorite()">
+❤️ Favorite
+</button>
+
 </div>
 </div>
 
-<div class="recipe-card">
+<div class="recipe-card"
+data-category="Breakfast">
+
 <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af">
+
 <div class="recipe-content">
 <h3>Sandwich</h3>
 <p>Healthy and tasty sandwich.</p>
+
 <div class="recipe-info">
 <span>⏱ 10 min</span>
 <span>⭐ Easy</span>
 </div>
-<button class="favorite">❤️ Favorite</button>
+
+<button class="favorite"
+onclick="addFavorite()">
+❤️ Favorite
+</button>
+
 </div>
 </div>
 
 </div>
 
-<footer>
+<footer style="background:#222;color:white;text-align:center;padding:15px;margin-top:20px;">
 © 2026 Recipe Finder Dashboard
 </footer>
+
+<script>
+
+let favorites = 0;
+
+function addFavorite(){
+favorites++;
+document.getElementById("favCount").innerText = favorites;
+}
+
+function searchRecipes(){
+
+let input =
+document.getElementById("searchInput")
+.value.toLowerCase();
+
+let cards =
+document.querySelectorAll(".recipe-card");
+
+cards.forEach(card => {
+
+let title =
+card.querySelector("h3")
+.innerText.toLowerCase();
+
+if(title.includes(input)){
+card.style.display = "block";
+}
+else{
+card.style.display = "none";
+}
+
+});
+
+}
+
+function filterRecipes(category){
+
+let cards =
+document.querySelectorAll(".recipe-card");
+
+cards.forEach(card => {
+
+if(category === "all"){
+card.style.display = "block";
+}
+else if(card.dataset.category === category){
+card.style.display = "block";
+}
+else{
+card.style.display = "none";
+}
+
+});
+
+}
+
+</script>
 
 </body>
 </html>
